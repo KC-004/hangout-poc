@@ -1,0 +1,587 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #eef6f2;
+  background: #182d37;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+#world {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  outline: none;
+  touch-action: none;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  background: #c2fa72;
+  color: #142c25;
+  border: 0;
+  border-radius: 9px;
+  padding: 14px 19px;
+  font-weight: 700;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+button:hover {
+  filter: brightness(1.1);
+}
+input,
+select {
+  display: block;
+  width: 100%;
+  border: 1px solid #68807a;
+  background: #ffffff09;
+  color: white;
+  border-radius: 8px;
+  padding: 13px;
+  margin-top: 8px;
+}
+select option {
+  color: #122820;
+}
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+#lobby {
+  position: absolute;
+  left: 6vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 430px;
+  padding: 32px;
+  background: #102c2bea;
+  backdrop-filter: blur(18px);
+  border: 1px solid #a9d4bd33;
+  border-radius: 22px;
+  box-shadow: 0 24px 80px #0003;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #bfe881;
+  font-weight: 700;
+}
+h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 49px;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin: 24px 0;
+}
+em {
+  color: #c2fa72;
+  font-style: normal;
+}
+p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #d2ded8;
+}
+#join button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+small {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #b8cbc3;
+}
+#lobby > small {
+  display: block;
+  margin-top: 20px;
+}
+#joinStatus {
+  color: #ffca96;
+  font-size: 13px;
+  margin-top: 12px;
+}
+header {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+header strong {
+  font:
+    700 23px "Space Grotesk",
+    sans-serif;
+  margin-right: auto;
+  text-shadow: 0 2px 8px #000;
+}
+header i {
+  font:
+    500 10px "DM Sans",
+    sans-serif;
+  display: block;
+  letter-spacing: 3px;
+}
+header span,
+aside,
+footer,
+#nearby {
+  background: #132e2be8;
+  border: 1px solid #ffffff20;
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+}
+header span {
+  padding: 12px;
+}
+#leave {
+  background: #132e2b;
+  color: white;
+  border: 1px solid #ffffff40;
+}
+aside {
+  position: absolute;
+  top: 115px;
+  left: 28px;
+  width: 220px;
+  padding: 20px;
+}
+h2 {
+  font:
+    600 23px "Space Grotesk",
+    sans-serif;
+  margin: 12px 0;
+}
+progress {
+  width: 100%;
+  height: 10px;
+  accent-color: #c2fa72;
+}
+#stats {
+  font-size: 12px;
+}
+#status {
+  color: #ffcc8f;
+  font-size: 12px;
+}
+footer {
+  position: absolute;
+  bottom: 25px;
+  left: 28px;
+  right: 28px;
+  padding: 14px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+footer b {
+  color: #c2fa72;
+}
+#voiceStatus {
+  display: inline-block;
+  margin-left: 14px;
+  max-width: 270px;
+  font-size: 12px;
+}
+#nearby {
+  position: absolute;
+  right: 28px;
+  top: 110px;
+  padding: 14px;
+  font-size: 12px;
+  max-width: 240px;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 700px) {
+  #lobby {
+    width: 90vw;
+    left: 5vw;
+    padding: 24px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  footer {
+    flex-direction: column;
+    gap: 12px;
+    left: 12px;
+    right: 12px;
+  }
+  aside {
+    left: 12px;
+    width: 180px;
+  }
+  header {
+    left: 12px;
+    right: 12px;
+    gap: 10px;
+  }
+  #nearby {
+    right: 12px;
+    top: 320px;
+  }
+  header span {
+    font-size: 11px;
+  }
+}
+/* Touch controls stay outside the canvas so moving and looking can happen together. */
+body {
+  overscroll-behavior: none;
+}
+#world {
+  height: 100dvh;
+}
+#touchControls {
+  display: none;
+}
+#lobby {
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+}
+input,
+select {
+  font-size: 16px;
+}
+@media (any-pointer: coarse), (max-width: 700px) {
+  #touchControls {
+    display: block;
+  }
+  #joystick {
+    position: fixed;
+    bottom: max(25px, env(safe-area-inset-bottom));
+    left: max(22px, env(safe-area-inset-left));
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #163c3580;
+    border: 2px solid #d5f5bc88;
+    touch-action: none;
+    user-select: none;
+    display: grid;
+    place-items: center;
+  }
+  #stick {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #c2fa72;
+    box-shadow: 0 3px 14px #0004;
+    pointer-events: none;
+  }
+  #touchActions {
+    position: fixed;
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(35px, env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  #touchActions button {
+    touch-action: manipulation;
+    user-select: none;
+    min-width: 60px;
+    min-height: 60px;
+    border-radius: 50%;
+    border: 2px solid #d5f5bc88;
+  }
+  #run {
+    background: #163c35dc;
+    color: white;
+  }
+  #run[aria-pressed="true"] {
+    background: #c2fa72;
+    color: #142c25;
+  }
+  #punch {
+    width: 78px;
+    height: 78px;
+  }
+  #touchHint {
+    position: fixed;
+    bottom: 164px;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    font-size: 11px;
+    text-shadow: 0 1px 4px #000;
+  }
+  header {
+    top: max(10px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    gap: 8px;
+  }
+  header strong {
+    font-size: 18px;
+  }
+  header i {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  header span {
+    padding: 8px;
+    font-size: 11px;
+  }
+  #leave {
+    padding: 12px;
+    min-height: 44px;
+  }
+  aside {
+    top: calc(65px + env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    width: 155px;
+    padding: 10px;
+    pointer-events: none;
+  }
+  aside .eyebrow {
+    display: none;
+  }
+  aside h2 {
+    font-size: 16px;
+    margin: 0 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #stats,
+  #status {
+    font-size: 10px;
+    margin: 4px 0 0;
+    line-height: 1.3;
+  }
+  footer {
+    top: calc(65px + env(safe-area-inset-top));
+    bottom: auto;
+    left: auto;
+    right: max(12px, env(safe-area-inset-right));
+    width: 150px;
+    padding: 8px;
+  }
+  footer > div:first-child {
+    display: none;
+  }
+  #voice {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px;
+  }
+  #voiceStatus {
+    display: block;
+    font-size: 10px;
+    margin: 5px 0 0;
+    overflow-wrap: anywhere;
+  }
+  #nearby {
+    top: calc(210px + env(safe-area-inset-top));
+    right: 12px;
+    padding: 8px;
+    font-size: 10px;
+    max-width: 160px;
+    pointer-events: none;
+  }
+}
+@media (any-pointer: coarse) and (orientation: landscape) and (max-height: 550px) {
+  #lobby {
+    width: min(430px, 90vw);
+    padding: 18px;
+  }
+  #lobby h1 {
+    font-size: 30px;
+    margin: 12px 0;
+  }
+  #lobby > p,
+  #lobby > small {
+    display: none;
+  }
+  #lobby label {
+    margin-bottom: 8px;
+  }
+  #nearby {
+    top: auto;
+    bottom: 135px;
+  }
+  #touchHint {
+    bottom: 10px;
+    width: 40%;
+    left: 30%;
+  }
+  aside #status {
+    display: none;
+  }
+}
+/* Compact in-game HUD and action tray. */
+#hud header strong {
+  font-size: 16px;
+}
+#hud header i {
+  display: none;
+}
+#hud aside {
+  width: 170px;
+  padding: 10px 12px;
+}
+#hud aside .eyebrow,
+#hud #status {
+  display: none;
+}
+#hud aside h2 {
+  font-size: 15px;
+  margin: 0 0 5px;
+}
+#hud #stats {
+  margin: 4px 0 0;
+  font-size: 10px;
+}
+#hud footer {
+  top: 80px;
+  bottom: auto;
+  left: auto;
+  right: 28px;
+  width: auto;
+  padding: 5px;
+  border-radius: 28px;
+}
+#hud footer > div:first-child {
+  display: none;
+}
+#hud footer > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+#hud #voice {
+  width: 78px;
+  min-height: 44px;
+  padding: 8px;
+  border-radius: 24px;
+  font-size: 12px;
+}
+#audioDetails summary {
+  cursor: pointer;
+  list-style: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
+#audioDetails summary::-webkit-details-marker {
+  display: none;
+}
+.audioPanel {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 205px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #132e2bf5;
+  border: 1px solid #ffffff25;
+}
+.audioPanel strong {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+#hud #voiceStatus {
+  display: block;
+  margin: 10px 0;
+  font-size: 12px;
+}
+#hud .audioPanel #nearby {
+  position: static;
+  max-width: none;
+  padding: 8px 0 0;
+  border: 0;
+  background: none;
+  font-size: 11px;
+}
+#actionBar {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  display: flex;
+  gap: 8px;
+}
+#actionBar button {
+  width: 54px;
+  height: 54px;
+  padding: 4px;
+  border-radius: 16px;
+  background: #163c35dc;
+  color: #eaf6de;
+  border: 1px solid #d5f5bc55;
+  touch-action: manipulation;
+}
+#actionBar button span {
+  display: block;
+  font-size: 22px;
+  line-height: 25px;
+}
+#actionBar small {
+  display: block;
+  color: inherit;
+  font-size: 9px;
+}
+#actionBar button:active,
+#touchActions button:active {
+  transform: scale(0.93);
+}
+@media (any-pointer: coarse), (max-width: 700px) {
+  #hud aside {
+    width: 150px;
+  }
+  #hud footer {
+    top: calc(65px + env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  #actionBar {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: calc(125px + env(safe-area-inset-bottom));
+    gap: 6px;
+  }
+  #actionBar button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+  #touchHint {
+    display: none;
+  }
+  #joystick {
+    width: 108px;
+    height: 108px;
+  }
+  #touchActions {
+    gap: 10px;
+  }
+  #touchActions #punch {
+    width: 68px;
+    height: 68px;
+  }
+  #touchActions #run {
+    min-width: 52px;
+    min-height: 52px;
+    padding: 8px;
+  }
+}
+@media (any-pointer: coarse) and (max-height: 450px) {
+  #actionBar {
+    bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+}

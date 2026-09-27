@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>TopFun · Wildgrounds</title>
+  </head>
+  <body>
+    <canvas id="world"></canvas>
+    <main id="lobby">
+      <div class="eyebrow">TOPFUN / MULTIPLAYER LAB</div>
+      <h1>Meet in the<br /><em>Wildgrounds.</em></h1>
+      <p>
+        A shared little world. Find your friends, get close to talk, and
+        challenge them to a friendly fight.
+      </p>
+      <form id="join">
+        <label
+          >Your explorer name<input
+            id="name"
+            maxlength="20"
+            placeholder="Enter a name"
+            required
+            autocomplete="nickname" /></label
+        ><label
+          >Character<select id="avatar">
+            <option value="male">Male explorer</option>
+            <option value="female">Female explorer</option>
+          </select></label
+        ><button>Enter the world <span>↗</span></button>
+      </form>
+      <small
+        >Up to 10 explorers · Guest access · Touch + keyboard controls</small
+      >
+      <div id="joinStatus" role="status"></div>
+    </main>
+    <section id="hud" hidden>
+      <header>
+        <strong>TOPFUN <i>WILDGROUNDS</i></strong
+        ><span id="population"></span><button id="leave">Leave</button>
+      </header>
+      <aside>
+        <div class="eyebrow">YOUR EXPLORER</div>
+        <h2 id="playerName"></h2>
+        <progress id="health" max="100" value="100"></progress>
+        <p id="stats"></p>
+        <p id="status" role="status"></p>
+      </aside>
+      <footer>
+        <div>
+          WASD move · Shift run · F punch · Space jump · G wave · H dance
+        </div>
+        <div>
+          <button
+            id="voice"
+            title="Enable or mute your microphone"
+            aria-label="Enable or mute microphone"
+          >
+            Mic off
+          </button>
+          <details id="audioDetails">
+            <summary aria-label="Audio information" title="Audio information">
+              ···
+            </summary>
+            <div class="audioPanel">
+              <strong>PROXIMITY AUDIO</strong
+              ><span id="voiceStatus" role="status">Voice off</span
+              ><small>Nearby players hear you within 25 m.</small>
+              <div id="nearby"></div>
+            </div>
+          </details>
+        </div>
+      </footer>
+      <div id="actionBar" aria-label="Player actions">
+        <button id="wave" title="Wave (G)">
+          <span aria-hidden="true">✋</span><small>Wave</small></button
+        ><button id="dance" title="Dance (H)">
+          <span aria-hidden="true">♫</span><small>Dance</small></button
+        ><button id="jump" title="Jump (Space)">
+          <span aria-hidden="true">↑</span><small>Jump</small>
+        </button>
+      </div>
+      <div id="touchControls" aria-label="Touch game controls">
+        <div id="joystick" aria-label="Drag to move">
+          <span id="stick"></span>
+        </div>
+        <div id="touchActions">
+          <button id="run" aria-pressed="false">Run</button
+          ><button id="punch">Punch</button>
+        </div>
+        <span id="touchHint">Drag the world to look · Pinch to zoom</span>
+      </div>
+    </section>
+    <script type="module" src="/client/main.ts"></script>
+  </body>
+</html>

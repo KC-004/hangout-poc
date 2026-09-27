@@ -1,0 +1,36 @@
+{
+  "name": "topfun-poc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"tsx watch server/index.ts\" \"vite --host 0.0.0.0\"",
+    "build": "tsc --noEmit && vite build",
+    "start": "tsx server/index.ts",
+    "test": "tsx --test tests/movement.test.ts",
+    "test:multiplayer": "tsx tests/multiplayer.ts"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^9.28.0",
+    "@colyseus/core": "^0.18.17",
+    "@colyseus/schema": "^5.0.34",
+    "@colyseus/sdk": "^0.18.4",
+    "@colyseus/ws-transport": "^0.18.1",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "livekit-client": "^2.22.3",
+    "livekit-server-sdk": "^2.15.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "concurrently": "^9.2.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vite": "^6.4.0"
+  },
+  "engines": {
+    "node": ">=22.22.0"
+  }
+}
